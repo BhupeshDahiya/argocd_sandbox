@@ -74,3 +74,8 @@ autoscaling:
   maxReplicas: 3
   targetCPUUtilizationPercentage: 85
   targetMemoryUtilizationPercentage: 85
+
+serviceMonitor:
+  enabled: true
+  interval: 30s
+  path: /metrics

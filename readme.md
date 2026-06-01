@@ -14,6 +14,8 @@ Aspiring DevOps Engineer with a strong interest in cloud-native technologies, Ku
 
 - A package*.json file existing to build a docker img from
 - Existing EKS cluster
+- Prometheus, Grafana, and the ELK stack are already deployed as shared platform services within the EKS cluster
+- The node app is outputting logs to stdout or stderr, which is being collected by Fluentbit for ELK stack
 - NGINX Ingress Controller installed
 - Prometheus Operator installed
 - Docker Hub repository available
