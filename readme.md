@@ -1,6 +1,6 @@
 ## Career Objective
 
-Aspiring DevOps Engineer with a strong interest in cloud-native technologies, Kubernetes, AWS, CI/CD automation, observability, and infrastructure automation. Seeking opportunities to build scalable, secure, and reliable platforms while continuously improving software delivery and operational excellence.
+Aspiring DevOps Engineer with a strong interest in cloud-native technologies, Kubernetes, AWS, CI/CD automation, observability, and infrastructure automation. Seeking opportunities to build scalable, secure, and reliable platforms while continuously improving software delivery and operational excellence
 
 ## Architectural decisions
 
