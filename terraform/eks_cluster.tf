@@ -9,7 +9,7 @@ resource "aws_eks_cluster" "argocd_sandbox" {
   version  = "1.35"
 
   vpc_config {
-    subnet_ids = data.aws_subnets.default.ids
+    subnet_ids = [aws_subnet.private.id,aws_subnet.private_2.id]
   }
 
   # Ensure that IAM Role permissions are created before and deleted

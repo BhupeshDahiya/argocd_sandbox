@@ -26,7 +26,7 @@ resource "aws_subnet" "public" {
 
 resource "aws_subnet" "public_2" {
   vpc_id                  = aws_vpc.argocd_sandbox.id
-  cidr_block              = "10.0.1.0/24"
+  cidr_block              = "10.0.4.0/24"
   map_public_ip_on_launch = true
   availability_zone       = "us-east-1d"
 
@@ -139,11 +139,11 @@ output "vpc_id" {
   value = aws_vpc.argocd_sandbox.id
 }
 
-output "pub_sub" {
+output "pub_sub_1" {
   value = aws_subnet.public.id
 }
 
-output "pub_sub" {
+output "pub_sub_2" {
   value = aws_subnet.public_2.id
 }
 
@@ -162,7 +162,7 @@ output "pvt_sub_2" {
   ]
 }
 
-output "pvt_sub" {
+output "pvt_sub_1" {
   value = aws_subnet.private.id
 
   # forcing Terraform to hold back any instance using this subnet
