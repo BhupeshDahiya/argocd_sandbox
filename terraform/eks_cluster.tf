@@ -5,7 +5,7 @@ resource "aws_eks_cluster" "argocd_sandbox" {
     authentication_mode = "API"
   }
 
-  role_arn = aws_iam_role.cluster.arn
+  role_arn = aws_iam_role.eks_role.arn
   version  = "1.35"
 
   vpc_config {
@@ -41,5 +41,5 @@ resource "aws_iam_role" "eks_role" {
 
 resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.cluster.name
+  role       = aws_iam_role.eks_role.name
 }
