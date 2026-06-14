@@ -2,7 +2,7 @@ resource "aws_eks_node_group" "argocd_sandbox" {
   cluster_name    = aws_eks_cluster.argocd_sandbox.name
   node_group_name = "argocd_sandbox"
   node_role_arn   = aws_iam_role.argocd_sandbox.arn
-  subnet_ids      = [aws_subnet.private.id,aws_subnet.private_2.id]
+  subnet_ids      = [aws_subnet.private.id, aws_subnet.private_2.id]
 
   scaling_config {
     desired_size = 1

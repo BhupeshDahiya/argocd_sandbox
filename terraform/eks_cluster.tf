@@ -9,7 +9,7 @@ resource "aws_eks_cluster" "argocd_sandbox" {
   version  = "1.35"
 
   vpc_config {
-    subnet_ids = [aws_subnet.private.id,aws_subnet.private_2.id]
+    subnet_ids = [aws_subnet.private.id, aws_subnet.private_2.id]
   }
 
   # Ensure that IAM Role permissions are created before and deleted
@@ -42,4 +42,32 @@ resource "aws_iam_role" "eks_role" {
 resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.eks_role.name
+}
+
+resource "aws_eks_addon" "vpc_cni" {
+  cluster_name = aws_eks_cluster.argocd_sandbox.name
+  addon_name   = "vpc-cni"
+}
+
+resource "aws_eks_addon" "coredns" {
+  cluster_name = aws_eks_cluster.argocd_sandbox.name
+  addon_name   = "coredns"
+  depends_on   = [aws_eks_node_group.argocd_sandbox] # Needs nodes to run on!
+}
+
+resource "aws_eks_addon" "kube_proxy" {
+  cluster_name = aws_eks_cluster.argocd_sandbox.name
+  addon_name   = "kube-proxy"
+}
+
+# add on the pod identity agent for IRSA support, which is required for ArgoCD to manage AWS resources on the cluster
+resource "aws_eks_addon" "pod_identity" {
+  cluster_name = aws_eks_cluster.argocd_sandbox.name
+  addon_name   = "eks-pod-identity-agent"
+
+  depends_on = [aws_eks_node_group.argocd_sandbox]
+}
+
+output "kubeconfig_command" {
+  value = "aws eks update-kubeconfig --region us-east-1 --name ${aws_eks_cluster.argocd_sandbox.name}"
 }
