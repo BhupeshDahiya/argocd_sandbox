@@ -6,6 +6,10 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
+      version = "~> 3.2.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
       version = "~> 2.0"
     }
     http = {
@@ -24,9 +28,15 @@ data "aws_eks_cluster_auth" "argocd_sandbox" {
 }
 
 provider "helm" {
-  kubernetes {
+  kubernetes = {
     host                   = aws_eks_cluster.argocd_sandbox.endpoint
     cluster_ca_certificate = base64decode(aws_eks_cluster.argocd_sandbox.certificate_authority[0].data)
     token                  = data.aws_eks_cluster_auth.argocd_sandbox.token
   }
+}
+
+provider "kubernetes" {
+  host                   = aws_eks_cluster.argocd_sandbox.endpoint
+  cluster_ca_certificate = base64decode(aws_eks_cluster.argocd_sandbox.certificate_authority[0].data)
+  token                  = data.aws_eks_cluster_auth.argocd_sandbox.token
 }

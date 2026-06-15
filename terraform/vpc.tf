@@ -28,7 +28,7 @@ resource "aws_subnet" "public_2" {
   vpc_id                  = aws_vpc.argocd_sandbox.id
   cidr_block              = "10.0.4.0/24"
   map_public_ip_on_launch = true
-  availability_zone       = "us-east-1d"
+  availability_zone       = "us-east-1b"
 
   tags = {
     Name                     = "argocd_sandbox-public"
@@ -39,7 +39,7 @@ resource "aws_subnet" "public_2" {
 resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.argocd_sandbox.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "us-east-1b"
+  availability_zone = "us-east-1a"
 
   tags = {
     Name                              = "argocd_sandbox-private"
@@ -50,7 +50,7 @@ resource "aws_subnet" "private" {
 resource "aws_subnet" "private_2" {
   vpc_id            = aws_vpc.argocd_sandbox.id
   cidr_block        = "10.0.3.0/24"
-  availability_zone = "us-east-1c"
+  availability_zone = "us-east-1b"
 
   tags = {
     Name                              = "argocd_sandbox-private"
